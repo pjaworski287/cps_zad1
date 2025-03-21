@@ -1,16 +1,21 @@
-# This is a sample Python script.
+from signals.signal_generation  import generate_sine_wave,  generate_uniform_noise
+from signals.signal_analysis    import calculate_mean,      calculate_rms
+from file_io.file_handler       import save_to_binary,      load_from_binary
+from visualization.plot         import plot_signal,         plot_histogram
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Generowanie sygnału
+t, sine_wave = generate_sine_wave(amplitude=5, frequency=1, t_start=0, duration=2)
+t, noise = generate_uniform_noise(amplitude=2, t_start=0, duration=2)
 
+# Analiza
+mean_value = calculate_mean(sine_wave)
+rms_value = calculate_rms(sine_wave)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Wizualizacja
+plot_signal(t, sine_wave, title="Sine Wave")
+plot_histogram(sine_wave, bins=10, title="Sine Wave Histogram")
 
+# Zapis i odczyt
+save_to_binary("sine_wave.bin", sine_wave)
+sampling_rate, loaded_signal = load_from_binary("sine_wave.bin")
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
