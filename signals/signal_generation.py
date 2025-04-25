@@ -43,6 +43,8 @@ def generate_full_rectified_sine_wave(amplitude, period, t_start, duration, samp
 # (S6) - Sygnał prostokątny
 # param: (amplituda (A), okres podstawowy (T), współczynnik wypełnienia (kw), czas poczatkowy (t1), czas trwania (d), częstotliwość próbkowania (sr))
 def generate_square_wave(amplitude, period, kw, t_start, duration, sampling_rate=1000):
+    if not (0 <= kw <= 1):
+        raise ValueError("Współczynnik wypełnienia (kw) musi być w zakresie [0, 1]")
     frequency = 1 / period  # f = 1/T
     t = np.linspace(t_start, t_start + duration, int(sampling_rate * duration), endpoint=False)
     sig = amplitude * signal.square(2 * np.pi * frequency * t, duty=kw)
@@ -51,6 +53,8 @@ def generate_square_wave(amplitude, period, kw, t_start, duration, sampling_rate
 # (S7) - Sygnał prostokątny (symetryczny)
 # param: (amplituda (A), okres podstawowy (T), współczynnik wypełnienia (kw), czas poczatkowy (t1), czas trwania (d), częstotliwość próbkowania (sr))
 def generate_symmetric_square_wave(amplitude, period, kw, t_start, duration, sampling_rate=1000):
+    if not (0 <= kw <= 1):
+        raise ValueError("Współczynnik wypełnienia (kw) musi być w zakresie [0, 1]")
     frequency = 1 / period  # f = 1/T
     t = np.linspace(t_start, t_start + duration, int(sampling_rate * duration), endpoint=False)
     sig = amplitude * signal.square(2 * np.pi * frequency * t, duty=kw)
@@ -60,6 +64,8 @@ def generate_symmetric_square_wave(amplitude, period, kw, t_start, duration, sam
 # (S8) - Sygnał trójkątny
 # param: (amplituda (A), okres podstawowy (T), współczynnik wypełnienia (kw), czas poczatkowy (t1), czas trwania (d), częstotliwość próbkowania (sr))
 def generate_triangle_wave(amplitude, period, kw, t_start, duration, sampling_rate=1000):
+    if not (0 <= kw <= 1):
+        raise ValueError("Współczynnik wypełnienia (kw) musi być w zakresie [0, 1]")
     frequency = 1 / period  # f = 1/T
     t = np.linspace(t_start, t_start + duration, int(sampling_rate * duration), endpoint=False)
     sig = amplitude * signal.sawtooth(2 * np.pi * frequency * t, width=kw)

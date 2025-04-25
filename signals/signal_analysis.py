@@ -28,6 +28,8 @@ def calculate_complex_power(signal):
 
 # Przycięcie sygnału do najbliższej liczby pełnych okresów
 def trim_to_full_periods(signal, sampling_rate, frequency):
+    if frequency <= 0:
+        raise ValueError("Częstotliwość musi być większa od zera.")
     period_samples = int(sampling_rate / frequency)     # Liczba próbek w jednym okresie
     total_periods = len(signal) // period_samples       # Liczba pełnych okresów
     return signal[:total_periods * period_samples]      # Przycięcie sygnału
